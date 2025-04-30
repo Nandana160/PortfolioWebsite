@@ -1,0 +1,232 @@
+
+<html>
+<head>
+  <title>My Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+    }
+
+    .content {
+      padding: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .content img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px 0;
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      margin: 0 auto 20px;
+    }
+
+    .content a {
+      display: inline-block;
+      margin: 10px;
+      text-decoration: none;
+      color: #4a90e2;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3b7bc4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    form, #todo-list, #weather {
+      margin: 40px auto;
+      max-width: 500px;
+      text-align: left;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    form h3, #todo-list h3, #weather h3 {
+      margin-bottom: 15px;
+      color: #4a90e2;
+    }
+
+    form input, form textarea, #todoInput, #cityInput {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    #todo-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #todo-list li {
+      background: #e0e0e0;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #todo-list li:hover {
+      background-color: #d0d0d0;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .content img {
+        width: 150px;
+        height: 150px;
+      }
+
+      .content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Hi, I'm Nandana Sujith</h1>
+    <p>Web Developer | Designer | Creative Thinker</p>
+  </header>
+
+  <div class="content">
+    <img src="D:\CHRIST\Internship\Nandana Photo.png" alt="My Photo">
+    
+    <p>
+      Welcome to my personal portfolio! I’m passionate about building beautiful websites and creating unique digital experiences.
+    </p>
+    
+    <a href="https://github.com/Nandana160/PortfolioWebsite" target="_blank">GitHub</a>
+    <a href="mailto:nandanasujith2006@gmail.com">Email Me</a><br><br>
+    
+    <button onclick="sayHello()">Say Hello 👋</button>
+  </div>
+
+  <!-- Contact Form -->
+  <form id="contactForm" onsubmit="return validateForm()">
+    <h3>Contact Me</h3>
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- To-Do List -->
+  <div id="todo-list">
+    <h3>My To-Do List</h3>
+    <input type="text" id="todoInput" placeholder="Add a new task">
+    <button onclick="addTodo()">Add</button>
+    <ul id="todos"></ul>
+  </div>
+
+  <!-- Weather API Section -->
+  <div id="weather">
+    <h3>Check Weather</h3>
+    <input type="text" id="cityInput" placeholder="Enter city name">
+    <button onclick="getWeather()">Get Weather</button>
+    <p id="weatherResult"></p>
+  </div>
+
+  <footer>
+    © 2025 Nandana Sujith. All rights reserved.
+  </footer>
+
+  <script>
+    function sayHello() {
+      alert("Thanks for visiting my portfolio!");
+    }
+
+    function validateForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email.includes('@') || !message) {
+        alert("Please fill out all fields with valid data.");
+        return false;
+      }
+
+      alert("Thank you for contacting me!");
+      return true;
+    }
+
+    function addTodo() {
+      const input = document.getElementById("todoInput");
+      if (input.value.trim() === "") return;
+      const li = document.createElement("li");
+      li.textContent = input.value;
+      li.onclick = () => li.remove(); // Click to remove
+      document.getElementById("todos").appendChild(li);
+      input.value = "";
+    }
+
+    async function getWeather() {
+      const city = document.getElementById("cityInput").value.trim();
+      const result = document.getElementById("weatherResult");
+      if (!city) {
+        result.textContent = "Please enter a city name.";
+        return;
+      }
+
+      result.textContent = "Loading...";
+
+      try {
+        const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${city}`);
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message);
+        result.textContent = `🌤 ${data.location.name}: ${data.current.temp_c}°C, ${data.current.condition.text}`;
+      } catch (err) {
+        result.textContent = "Error: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
