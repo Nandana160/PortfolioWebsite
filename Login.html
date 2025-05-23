@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Nandana Sujith</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4ff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    #login {
+      flex-grow: 1;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 30px;
+      border: 2px solid #007BFF;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,123,255,0.2);
+      text-align: center;
+    }
+    #login input[type="text"],
+    #login input[type="password"] {
+      width: 90%;
+      padding: 12px;
+      margin: 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    #login button {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    #login button:hover {
+      background-color: #0056b3;
+    }
+    #login p {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    #login a {
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #login a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Login to Your Account</h1>
+  </header>
+
+  <section id="login">
+    <form id="loginForm" onsubmit="return validateLoginForm()">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="index1.html">Go to Home</a></p>
+  </section>
+
+  <footer>© 2025 Nandana Sujith. All rights reserved.</footer>
+
+  <script>
+    function validateLoginForm() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (username === '' || password === '') {
+        alert('Please fill in both username and password.');
+        return false;
+      }
+
+      // Hardcoded valid credentials
+      const validUsername = 'nandana';
+      const validPassword = '1234';
+
+      if (username === validUsername && password === validPassword) {
+        alert(`Welcome, ${username}! Redirecting to your portfolio...`);
+        window.location.href = 'index1.html'; // your portfolio page
+        return false; // prevent form submission
+      } else {
+        alert('Invalid username or password. Please try again.');
+        return false; // prevent form submission
+      }
+    }
+  </script>
+</body>
+</html>
+

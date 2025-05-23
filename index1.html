@@ -3,33 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
+  <title>Nandana Sujith - Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <nav>
-      <h1>MyPortfolio</h1>
-      <ul>
-        <li><a href="index1.html">Home</a></li>
-        <li><a href="todo.html">To-Do App</a></li>
-        <li><a href="products.html">Product List</a></li>
-      </ul>
-    </nav>
+    <h1>Hi, I'm Nandana Sujith</h1>
+    <p>Web Developer | Designer | Creative Thinker</p>
   </header>
 
-  <section class="hero">
-    <img src="D:\Nandana\Muscat\IMG-20250427-WA0048.jpg" alt="Profile" />
-    <h2>Hello, I'm Nandana Sujith</h2>
-    <p>Creative Web Developer</p>
-    <a href="D:\CHRIST\Resume.pdf" download class="btn">Download Resume</a>
+  <nav>
+    <a href="index1.html">Home</a>
+    <a href="todo.html">To-Do list</a>
+    <a href="products.html">Products</a>
+  </nav>
+
+  <section id="about" class="content">
+    <div class="img-container">
+      <img src="D:\Nandana\Muscat\IMG-20250427-WA0048.jpg" alt="My Photo" loading="lazy"/>
+    </div>
+   <a href="D:\CHRIST\Nandana Sujith.pdf" download class="btn">Download Resume</a>
+    <p>
+      I'm a passionate web developer with a flair for creativity and innovation.
+    </p>
+    <button onclick="sayHello()">Say Hello 👋</button><br/>
+    <a href="https://github.com/Nandana160/PortfolioWebsite" target="_blank">GitHub</a>
+    <a href="mailto:nandanasujith2006@gmail.com">Email Me</a>
   </section>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I love building clean, creative websites and web apps that are responsive and user-friendly.</p>
+  <section id="contact">
+    <h3>Contact Me</h3>
+    <form onsubmit="return validateForm()">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+      <button type="submit">Send</button>
+    </form>
   </section>
 
-  <footer>&copy; 2025 Nandana Sujith</footer>
+  <footer>© 2025 Nandana Sujith. All rights reserved.</footer>
+  <script src="script.js"></script>
 </body>
 </html>

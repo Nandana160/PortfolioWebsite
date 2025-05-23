@@ -2,29 +2,154 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Product List</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - Nandana Sujith</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #e6e6e6;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+    }
+
+    section {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      background-color: white;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    select {
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .product {
+      background: #eef;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 20px;
+      }
+
+      .product {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <nav>
-      <h1>Product Page</h1>
-      <ul>
-        <li><a href="index1.html">Home</a></li>
-        <li><a href="todo.html">To-Do App</a></li>
-        <li><a href="products.html">Product List</a></li>
-      </ul>
-    </nav>
+    <h1>Product Listing</h1>
+    <p>Explore my web and design creations</p>
   </header>
 
-  <section class="products">
-    <h2>Our Products</h2>
-    <div class="product-card">Smartphone – ₹20,000</div>
-    <div class="product-card">Laptop – ₹50,000</div>
-    <div class="product-card">Headphones – ₹1,500</div>
-    <div class="product-card">Smartwatch – ₹4,000</div>
+  <nav>
+    <a href="index1.html">Home</a>
+    <a href="todo.html">To-Do List</a>
+    <a href="products.html">Products</a>
+  </nav>
+
+  <section>
+    <h2>Filter & Sort Products</h2>
+
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" onchange="filterProducts()">
+      <option value="all">All</option>
+      <option value="web">Web</option>
+      <option value="design">Design</option>
+    </select>
+
+    <label for="sortFilter">Sort by:</label>
+    <select id="sortFilter" onchange="filterProducts()">
+      <option value="name">Name</option>
+    </select>
+
+    <div id="productList" style="margin-top: 20px;"></div>
   </section>
 
-  <footer>&copy; 2025 Nandana Sujith</footer>
+  <footer>© 2025 Nandana Sujith. All rights reserved.</footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const products = [
+        { name: "Portfolio Template", category: "web" },
+        { name: "Logo Design", category: "design" },
+        { name: "Responsive Layout", category: "web" },
+        { name: "Illustration Pack", category: "design" },
+        { name: "Landing Page UI", category: "web" },
+      ];
+
+      window.filterProducts = function () {
+        const category = document.getElementById("categoryFilter").value;
+        const sort = document.getElementById("sortFilter").value;
+        const list = document.getElementById("productList");
+
+        let filtered = [...products];
+
+        if (category !== "all") {
+          filtered = filtered.filter(p => p.category === category);
+        }
+
+        if (sort === "name") {
+          filtered.sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        list.innerHTML = "";
+        filtered.forEach(p => {
+          const div = document.createElement("div");
+          div.className = "product";
+          div.textContent = `${p.name} (${p.category})`;
+          list.appendChild(div);
+        });
+      };
+
+      filterProducts(); // Initial render
+    });
+  </script>
+
 </body>
 </html>
